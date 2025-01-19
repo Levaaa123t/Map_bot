@@ -10,7 +10,12 @@ def handle_start(message):
 
 @bot.message_handler(commands=['help'])
 def handle_help(message):
-    bot.send_message(message.chat.id, "Доступные команды:  ...")
+    bot.send_message(message.chat.id, """Доступные команды:  
+Писать города исключительно на английском языке!
+/show_city - Данная команда покажет твой город на карте
+/remember_city - Сохраняет города которые ты вписал
+/show_my_cities - Показывает города которые ты сохранял
+                     """)
     # Допиши команды бота
 
 
@@ -19,7 +24,7 @@ def handle_show_city(message):
     city_name = message.text.split()[-1]
     # Реализуй отрисовку города по запросу
     user_id = message.from_user.id
-    manager.create_grapf(f'image/{city_name}_{user_id}.png', [city_name])
+    manager.create_grapf(f'{city_name}_{user_id}.png', [city_name])
     with open(f'{city_name}_{user_id}.png','rb') as map:
         bot.send_photo(message.chat.id, map)
 
